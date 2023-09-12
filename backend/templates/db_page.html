@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>SQL DB Control Page</title>
+</head>
+
+<body>
+    <div class="w3-col m4">
+        <h2>This is SQL DB Control Page.</h2>
+        <ul class="vertical ex">
+            <li><a class="active" href="/init">init table</a></li>
+            <li><a href="/drop">drop table</a></li>
+            <li><a href="/">nothing</a></li>
+            <li><a href="/">nothing</a></li>
+        </ul>
+        <h3>{{result}}</h3>
+    </div>
+</body>
+
+</html>
