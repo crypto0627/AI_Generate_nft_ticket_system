@@ -69,9 +69,55 @@ npm run dev
 ```
 now frontend is running.
 
-## Deploy the contract
-contract code:
+## IPFS metadata Set UP
+go to pinata and create this metadata and img, metadata is a json file.
 ```bash
-cd src/contracts
+{
+  "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.", 
+  "external_url": "https://openseacreatures.io/3", 
+  "image": "你的IPFS圖片網址", 
+  "name": "Dave Starbelly",
+  "attributes": [ ... ]
+}
 ```
+now you have metadata CID which can input to ERC-721 contract as nft photo.
 
+## Deploy the contract
+- go to [openzepplin](https://docs.openzeppelin.com/contracts/4.x/wizard)
+- choose erc-721 template and click open in Remix
+- paste code `./smartcontract/Nft_ticket.sol` on Remix IDE.
+- Click solidity compiler and choose 0.8.9 version.
+- Now compile smart contract and run script.
+- You can choose togle box which name is ticket.sol in deploy and run transactions page.
+- Deploy with two variables CUSTOMBASEURI_=ticket, PROXYREGISTRYADDRESS_=your wallet address.
+- Now go to receive mumbai faucet on [alchemy polygon](https://mumbaifaucet.com/).
+- And you need to metamask network to mumbai testnet.
+- Finally, you can deploy contract in mumbai testnet,and remixIDE is going to display a contract address.
+- You can go to mumbai explorer to search your contract with contract address.
+
+## Verify the contract
+- If you deployed contract in mumbai testnet.You can verify your contract with RemixIDE.
+- Click Pugin manager,ahd search "CONTRACT VERIFICATION - ETHERSCAN" to active it.
+- go to the polygon explorer to create API KEY,and paste API key on CONTRACT VERIFICATION - ETHERSCAN.
+  <img width="183" alt="image" src="https://github.com/crypto0627/AI_Generate_nft_ticket_system/assets/62930885/35456646-7325-40fa-bd34-9c563e191539">
+- now, your contract is verified.
+
+## Upload your ai generation photo to contract write "setTokenUI" function
+- go to contract write function page on mumbai testnet.
+- click connect web3 button.
+- select "setTokenURI" function with your pinata ipfs metadata cid.
+
+
+## Modify `./frontend/src/utils`
+- modify abi.json with your contract abi which is deployed on mumbai testnet
+- modify interact.jsx about contracAddress and alchemyAPI key.
+- If you don't have alchemyAPI key,you can go to alchemy dashbroad to create it.
+- Now, All things are setting up.
+
+### Demo step
+- First, Start frontend and backend.
+- open frontend localhost web page,and click "購買門票".
+- input your data and click "連結錢包",now you can click "確認購買" for you wanna buy nft ticket.
+- Second, go to admin page.(account:admin, password: admin) and login,,if you are administrator.
+- you can connect wallet to mint nft to your manager wallet address.
+- Finally, you can see your nft on OpenSea web3 site.
